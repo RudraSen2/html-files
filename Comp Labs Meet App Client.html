@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comp Labs Meet App Client</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <style>
+    body {
+      color: rgb(29, 28, 29);
+      font-family: Roboto, sans-serif;
+      padding-top: 150px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .dialog {
+      text-align: center;
+      font-size: 0.906rem;
+      color: rgb(131, 145, 165);
+    }
+
+    .dialog div {
+      margin-top: 20px;
+    }
+
+    .dialog a {
+      color: rgb(29, 99, 204);
+      text-decoration: none;
+    }
+
+    .dialog .heading {
+      color: rgb(29, 28, 29);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+<body>
+<main role="main" class="container">
+  <div class="d-flex justify-content-center">
+
+    <div style="display:none" id="launch-success">
+      <div class='text-align-center dialog'>
+        <img src="clmeet-assets/wpf.svg"/>
+        <div class="heading">Comp Labs Meet Desktop app</div>
+        <div>
+          You may need to click <strong>Open Comp Labs Meet</strong> in the dialog shown by the browser.
+        </div>
+        <div>
+          Don’t have Comp Labs Meet installed? <a href="https://github.com/comp-labs/comp-labs-meet#installation-from-installers" target="_blank">Download Now</a>
+        </div>
+
+        <div><strong><a href="#" onclick="continueLoadingWebapp();">Use the web app instead</a></strong></div>
+      </div>
+    </div>
+
+    <div style="display:none" id="launch-failed">
+      <div class='text-align-center dialog'>
+        <img src="clmeet-assets/desktop.svg"/>
+        <div class="heading">Life is more fun when you use the Comp Labs Meet app</div>
+        <div>
+          <button class="btn btn-primary" onclick="doDownload()">Download the app</button>
+        </div>
+
+        <div><strong><a href="#" onclick="continueLoadingWebapp();">Use the web app instead</a></strong></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script>
+    const BASE_URL_WEB = 'https://meet.jit.si'; // need to change after meet server launches.
+
+    // Get room name from get param
+    let room = '';
+
+    location.search
+      .substr(1)
+      .split("&")
+      .forEach(function (item) {
+        let pair = item.split("=");
+        console.log(pair);
+        if (pair[0] === 'room') room = decodeURIComponent(pair[1]);
+      });
+
+    const appUri = `comp-labs-meet://${room}`;
+    const webUri = `${BASE_URL_WEB}/${room}`;
+
+
+    function loadDesktopApp(nativeAppUri, onFailure, onMaybeLoaded) {
+      // Attempt to guess whether custom protocol scheme is registered based on the following assumptions:
+      //  1. if no handler for current scheme, browser does nothing and focus remains on page
+      //  2. if scheme registered, browser would attempt to load external app
+      //     * dialog asking for permission will be shown (window looses focus)
+      //     * or permission previously granted and remembered, app is loaded (window looses visibility)
+      //
+      // Note: We cannot really tell the difference if:
+      //  - app loaded successfully
+      //  - user refused permission
+      //  - scheme registered but app failed to load
+      //
+      const dialogAppearTimeout = 500;  // how long do we give for dialog to show up before we consider load fail.
+      let hasLostFocus = false;
+      let hasLostVisibility = false;
+
+      // window blurred when dialog shown
+      function onBlur() {
+        hasLostFocus = true;
+      }
+
+      // document hidden when native app shown (or manually backgrounded :( )
+      function onVisibilityChange(e) {
+        if (e.target.visibilityState === 'hidden') {
+          hasLostVisibility = true;
+        }
+      }
+
+      window.addEventListener('blur', onBlur);
+      document.addEventListener('visibilitychange', onVisibilityChange);
+
+      setTimeout(function () {
+        window.removeEventListener('blur', onBlur);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        if (!hasLostFocus && !hasLostVisibility) {
+          if (onFailure) onFailure();
+        } else {
+          if (onMaybeLoaded) onMaybeLoaded();
+        }
+      }, dialogAppearTimeout);
+
+      window.location = nativeAppUri;
+    }
+
+    function continueLoadingWebapp() {
+      // user may choose to load web app instead, even if they have (or don't have) desktop app
+      window.location = webUri;
+    }
+
+    function showDownloadLink() {
+      // If loadDesktopApp() failed, assume desktop app not installed. So we offer up download link
+      console.log('failed to locate native app');
+      document.getElementById('launch-failed').style.display = 'block';
+    }
+
+    function doDownload() {
+      window.open('https://github.com/comp-labs/comp-labs-meet' , '_blank');
+    }
+
+    function showLoadedMessage() {
+      // if loadDesktopApp() did not fail, all this tell us is that the jitsi-meet:// scheme may have been registered.
+      // It does not tell us if the user gave permission to load the external app, or if the scheme failed to
+      // load uninstalled app.
+      // We make sure we include a link to go to web app, just in case.
+      console.log('native app _may_ be available');
+      document.getElementById('launch-success').style.display = 'block';
+    }
+
+    loadDesktopApp(appUri, showDownloadLink, showLoadedMessage);
+
+  </script>
+
+</main>
+</body>
+</html>

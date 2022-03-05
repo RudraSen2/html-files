@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>macOS ISO Downloader</title>
+<style>
+.mybuttonstyle {
+  background-color: #007AFF; /* Blue */
+  border: none;
+  color: white;
+  padding: 4px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: Helvetica, sans-serif;
+}
+.buttonstyle {border-radius: 12px;}
+</style>
+</head>
+<body>
+<form onsubmit="this.action = document.getElementById('filename').value">
+    <select id="filename">
+        <option value="/iso/BigSur.iso">macOS Big Sur 11.5</option>
+        <option value="/iso/Catalina.iso">macOS Catalina</option>
+        <option value="/iso/Mojave.iso">macOS Mojave</option>
+        <option value="example.pdf">Example PDF</option>
+    </select>
+    <input type="submit" value="Download" class="mybuttonstyle buttonstyle" />
+</form>
+</body>
+</html>

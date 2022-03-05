@@ -1,0 +1,21 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+<foreignObject width="300" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+<style>
+@font-face {
+   font-family: myFirstFont;
+   src: url(sansation_light.woff);
+}
+
+* {
+   font-family: myFirstFont;
+}
+</style>
+<label for="file">App Development Progress</label>
+<br>
+</br>
+<progress id="file" value="80" max="100"> 80% Complete </progress>
+<label for="percent">80% Complete</label>
+    </div>
+</foreignObject>
+</svg>

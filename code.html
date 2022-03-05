@@ -1,0 +1,15 @@
+<pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   "Version": "2012-10-17",
+   "Statement": [
+      <span>{</span>
+         "Effect": "Allow",
+         "Principal": <span>{</span> "Service": "vmie.amazonaws.com" },
+         "Action": "sts:AssumeRole",
+         "Condition": <span>{</span>
+            "StringEquals":<span>{</span>
+               "sts:Externalid": "vmimport"
+            }
+         }
+      }
+   ]
+}</code></pre>

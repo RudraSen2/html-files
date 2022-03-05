@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Jira Server App by Comp Labs | Connect to your Jira Server using the App</title>
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(font.otf);
+        }
+        * {
+          text-align: center;
+          font-family: myFirstFont;
+          /* background-color: #147EFB; */
+          /*color: #FFFFFF;*/
+          vertical-align: middle;
+        }
+        ::-webkit-input-placeholder {
+          text-align: center;
+        }
+        :-moz-placeholder {
+          text-align: center;
+        }
+      </style>
+</head>
+<body>
+    <h1>Jira Server by Comp Labs</h1>
+    <p>
+        Enter your Jira Server URL in the field below: 
+        (Example: https://jira.example.com)
+    </p>
+    <form>
+        <input type="url" required="required" id="url" name="urlfield" placeholder="Enter Your Jira Server URL" />
+        <input type="button" id="btn" value="GO" onClick="javascript: window.open(document.getElementById('url').value);" />
+    </form>
+</body>
+</html>
