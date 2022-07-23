@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Hello Bitly</title>
+</head>
+<body>
+<?php
+$access_token =  'edfa13fa73f38aaa657a69906f47ffd8f935d730';
+$long_url='https://complabs.in';
+$url = 'https://api-ssl.bitly.com/v3/shorten?access_token='.$access_token.'&longUrl='.$long_url;
+$ch1 = curl_init($url);  //open connection
+curl_setopt($ch1, CURLOPT_CUSTOMREQUEST, "GET"); 
+curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0 );
+curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0 );
+curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1 );
+$result = curl_exec($ch1); //execute post
+$data_array = json_decode($result);
+echo "<pre>";
+print_r($result);
+echo 'Long url:  '.$long_url.'<br>';
+echo 'shortened url: '.$data_array->data->url;
+?>
+</body>
+</html>
