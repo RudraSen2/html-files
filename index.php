@@ -7,20 +7,20 @@
 	// Configuration                
 	// =============================
 	
-	$browseDirectories = false; // Navigate into sub-folders
-	$title = 'Index of {{path}}';
+	$browseDirectories = true; // Navigate into sub-folders
+	$title = 'Comp Labs Files - {{path}}';
 	$subtitle = '{{files}} objects in this folder, {{size}} total'; // Empty to disable
-	$breadcrumbs = false; // Make links in {{path}}
-	$showParent = false; // Display a (parent directory) link
+	$breadcrumbs = true; // Make links in {{path}}
+	$showParent = true; // Display a (parent directory) link
 	$showDirectories = true;
 	$showDirectoriesFirst = true; // Lists directories first when sorting by name
-	$showHiddenFiles = false; // Display files starting with "." too
-	$alignment = 'left'; // You can use 'left' or 'center'
+	$showHiddenFiles = true; // Display files starting with "." too
+	$alignment = 'center'; // You can use 'left' or 'center'
 	$showIcons = true;
 	$dateFormat = 'd/m/y H:i'; // Used in date() function
 	$sizeDecimals = 1;
-	$robots = 'noindex, nofollow'; // Avoid robots by default
-	$showFooter = true; // Display the "Powered by" footer
+	$robots = '*'; // Avoid robots by default
+	$showFooter = false; // Display the "Powered by" footer
 	$openIndex = $browseDirectories && true; // Open index files present in the current directory if $browseDirectories is enabled
 	$browseDefault = null; // Start on a different "default" directory if $browseDirectories is enabled
 	
