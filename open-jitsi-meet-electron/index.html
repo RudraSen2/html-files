@@ -44,13 +44,13 @@
 
     <div style="display:none" id="launch-success">
       <div class='text-align-center dialog'>
-        <img src="clmeet-assets/wpf.svg"/>
+        <img src="./wpf.svg"/>
         <div class="heading">Comp Labs Meet Desktop app</div>
         <div>
           You may need to click <strong>Open Comp Labs Meet</strong> in the dialog shown by the browser.
         </div>
         <div>
-          Don’t have Comp Labs Meet installed? <a href="https://github.com/comp-labs/comp-labs-meet#installation-from-installers" target="_blank">Download Now</a>
+          Don’t have Comp Labs Meet installed? <a href="https://complabs.in/apps/comp-labs-meet" target="_blank">Download Now</a>
         </div>
 
         <div><strong><a href="#" onclick="continueLoadingWebapp();">Use the web app instead</a></strong></div>
@@ -59,7 +59,7 @@
 
     <div style="display:none" id="launch-failed">
       <div class='text-align-center dialog'>
-        <img src="clmeet-assets/desktop.svg"/>
+        <img src="./desktop.svg"/>
         <div class="heading">Life is more fun when you use the Comp Labs Meet app</div>
         <div>
           <button class="btn btn-primary" onclick="doDownload()">Download the app</button>
@@ -147,7 +147,7 @@
     }
 
     function doDownload() {
-      window.open('https://github.com/comp-labs/comp-labs-meet' , '_blank');
+      window.open('https://complabs.in/apps/comp-labs-meet' , '_blank');
     }
 
     function showLoadedMessage() {
