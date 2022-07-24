@@ -14,8 +14,8 @@
 	$showParent = true; // Display a (parent directory) link
 	$showDirectories = true;
 	$showDirectoriesFirst = true; // Lists directories first when sorting by name
-	$showHiddenFiles = true; // Display files starting with "." too
-	$alignment = 'center'; // You can use 'left' or 'center'
+	$showHiddenFiles = false; // Display files starting with "." too
+	$alignment = 'left'; // You can use 'left' or 'center'
 	$showIcons = true;
 	$dateFormat = 'd/m/y H:i'; // Used in date() function
 	$sizeDecimals = 1;
@@ -114,7 +114,7 @@
 
 	// Add parent in case of browsing a sub-folder
 	if (!empty($_browse)) array_unshift($items, array(
-		'name' => '..',
+		'name' => 'Parent Directory',
 		'isparent' => false,
 		'isdir' => true,
 		'size' => 0,
