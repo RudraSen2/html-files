@@ -1,0 +1,20 @@
+<button onclick="scrollToTopFunction()" id="scrollToTopBtn" title="Go to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+<script>
+var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    scrollToTopBtn.style.display = "block";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+}
+
+function scrollToTopFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
