@@ -8,7 +8,7 @@
 	// =============================
 	
 	$browseDirectories = true; // Navigate into sub-folders
-	$title = 'Comp Labs Files - {{path}}';
+	$title = 'Tech Fiddle Files - {{path}}';
 	$subtitle = '{{files}} objects in this folder, {{size}} total'; // Empty to disable
 	$breadcrumbs = true; // Make links in {{path}}
 	$showParent = true; // Display a (parent directory) link
