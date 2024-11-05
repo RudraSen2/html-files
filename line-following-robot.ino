@@ -1,20 +1,13 @@
-// Arduino, 4x Motors, Motor Driver, Bluetooth Module, 2x IR Sensors, Jumper Wires, Chassis
-
-// Bluetooth
-
 #include <SoftwareSerial.h>
 
-#define IN1 4
-#define IN2 5
-#define IN3 6
-#define IN4 7
-#define EN1 9
-#define EN2 10
+#define IN1 3
+#define IN2 4
+#define IN3 5
+#define IN4 6
+#define EN1 2
+// #define EN2 10
 
-#define IR1 11
-#define IR2 12
-
-SoftwareSerial btSerial(2, 3);  // RX, TX
+SoftwareSerial btSerial(0, 1);  // RX, TX
 
 String data;
 int btVal;
@@ -41,7 +34,7 @@ void setup() {
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   digitalWrite(EN1, HIGH);
-  digitalWrite(EN2, HIGH);
+  // digitalWrite(EN2, HIGH);
 
   digitalWrite(IR1, HIGH);
   digitalWrite(IR2, HIGH);
@@ -74,15 +67,15 @@ void loop() {
         reverse();
         break;
 
-        // case 3:
-        //   Serial.println("Left");
-        //   left();
-        //   break;
+        case 3:
+          Serial.println("Left");
+          left();
+          break;
 
-        // case 4:
-        //   Serial.println("Right");
-        //   right();
-        //   break;
+        case 4:
+          Serial.println("Right");
+          right();
+          break;
 
       case 3:
         Serial.println("Stop");
@@ -102,28 +95,6 @@ void forward() {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-
-  // if (I12 == LOW && IR2 == LOW) {
-  //   digitalWrite(IN3, HIGH);
-  //   digitalWrite(IN4, LOW);
-  //   digitalWrite(IN1, HIGH);
-  //   digitalWrite(IN2, LOW);
-  // } else if (IR1 == LOW && IR2 == HIGH) {
-  //   digitalWrite(IN3, HIGH);
-  //   digitalWrite(IN4, LOW);
-  //   digitalWrite(IN1, LOW);
-  //   digitalWrite(IN2, LOW);
-  // } else if (IR1 == HIGH && IR2 == LOW) {
-  //   digitalWrite(IN3, LOW);
-  //   digitalWrite(IN4, LOW);
-  //   digitalWrite(IN1, HIGH);
-  //   digitalWrite(IN2, LOW);
-  // } else if ((IR1 == HIGH && IR2 == HIGH) || (IR1 == LOW && IR2 == LOW)) {
-  //   digitalWrite(IN3, LOW);
-  //   digitalWrite(IN4, LOW);
-  //   digitalWrite(IN1, LOW);
-  //   digitalWrite(IN2, LOW);
-  // }
 }
 
 void reverse() {
@@ -133,19 +104,19 @@ void reverse() {
   digitalWrite(IN4, HIGH);
 }
 
-// void left() {
-//   digitalWrite(IN1, LOW);
-//   digitalWrite(IN2, LOW);
-//   digitalWrite(IN3, HIGH);
-//   digitalWrite(IN4, LOW);
-// }
+void left() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
 
-// void right() {
-//   digitalWrite(IN1, HIGH);
-//   digitalWrite(IN2, LOW);
-//   digitalWrite(IN3, LOW);
-//   digitalWrite(IN4, LOW);
-// }
+void right() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
 
 void stoprobot() {
   digitalWrite(IN1, LOW);
